@@ -88,8 +88,11 @@ io.on('connection', function(socket){
       console.log(time() + ' >> SERVER: ' + list[socket.id] + ' disconnected...');
       socket.leave(socket.room);
        io.emit('status', time() + ' >> SERVER: ' + list[socket.id] + ' disconnected..').to(socket.room);
-       delete list[socket.id];
-       io.to(socket.room).emit('updatelist', list);
+      //  delete list[socket.id];
+      //  io.to(socket.room).emit('updatelist', list);
+      const currentchanneluser = getUsersInRoom(socket.room);
+      io.to(socket.room).emit('updatelist', '');
+      io.to(socket.room).emit('updatelist', currentchanneluser);
   });
 
   socket.on('switch', function(newChannel) {
