@@ -4,7 +4,10 @@ $(document).ready(function(){
   var socket = io();
   var local_user = '';
 
-  // Hide onlinetable & messageblock & focus on username textbox
+  // Set Channel_1 style
+  // Hide messagetable, channellist, textbox, channellist
+  // focus usernametextbox
+  $('#ch1').append($('<i style="color:#33FF00;"> </i>').text('Channel_1'));
   $('h2').hide();
   $('#messages').hide();
   $('#newmess').hide();
@@ -39,7 +42,6 @@ $(document).ready(function(){
     }
   });
 
-
 // write status to the client
   function writeStatus(status) {
     $('#messages').append($('<li style="color:#33FF00;"> </li>').text(status));
@@ -48,7 +50,6 @@ $(document).ready(function(){
   function writePriv(msg){
     $('#messages').append($('<li style="color:red; font-style:italic;"> </li>').text(msg));
   }
-
 
 // Sends chat messages & clean textbox
   $('#newmess').submit(function(){
@@ -92,56 +93,43 @@ $(document).ready(function(){
     scroll();
   });
 
-
 socket.on('private', function(data){
-//  if(data.name === local_user){
-  //  writePriv(data.time + ' You: (' + data.msg + ') to ' + data.user);
-  //}else{
     writePriv(data.time + ' ' + data.name + ': ' + data.msg);
-  //}
 });
-
-
-
-
-
-// function writeChannels(data){
-//   $('.channel').append($('<li>').text(data));
-// }
-
-// socket.on('updatechannels', function(ch){
-//     writeChannels(ch.eins);
-//     writeChannels(ch.zwei);
-//     writeChannels(ch.drei);
-// });
-
-
-
-
-
-
 
 // switch channels
   $('#ch1').click(function(){
     $('#messages').empty();
     var val = 'Channel_1';
     socket.emit('switch', val);
+    $('#ch1').text('');
+    $('#ch1').append($('<i style="color:#33FF00;"> </i>').text('Channel_1'));
+    $('#ch2').text('Channel_2');
+    $('#ch3').text('Channel_3');
   });
+
   $('#ch2').click(function(){
     $('#messages').empty();
     var val = 'Channel_2';
     socket.emit('switch', val);
+    $('#ch2').text('');
+    $('#ch2').append($('<i style="color:#33FF00;"> </i>').text('Channel_2'));
+    $('#ch1').text('Channel_1');
+    $('#ch3').text('Channel_3');
   });
   $('#ch3').click(function(){
     $('#messages').empty();
     var val = 'Channel_3';
     socket.emit('switch', val);
+    $('#ch3').text('');
+    $('#ch3').append($('<i style="color:#33FF00;"> </i>').text('Channel_3'));
+    $('#ch2').text('Channel_2');
+    $('#ch1').text('Channel_1');
   });
 
 // auto scroll to the end of page
   function scroll(){
     window.scrollTo(0, document.body.scrollHeight);
   }
-
 
 });

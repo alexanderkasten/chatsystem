@@ -103,7 +103,7 @@ body {
   margin-top: 90px;
 
   background: url('/pics/transparent.png');
-  
+
   float: right;
   list-style-type: none;
 }
@@ -212,7 +212,7 @@ h2 {
 .channel li{
   background: url('/pics/transparent.png');
   color: white;
-  font-style: italic;
+  /*font-style: italic;*/
 
 }
 a{
