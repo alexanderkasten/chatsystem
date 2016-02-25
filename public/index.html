@@ -32,8 +32,14 @@
 
 <!-- Messageblock -->
 <form action="" id="newmess" class="new">
-  <p> Private Nachrichten können mit /p "username" "text" versandt werden. Ohne Anführungszeichen und Groß- und Kleinschreibung beachten! </p>
+  <p> Private Nachrichten können mit /p "username" "text" versandt werden, ohne Anführungszeichen und Groß- und Kleinschreibung der Usernamen beachten! </p>
   <input id="m" autocomplete="off" placeholder="Message" /><button> Send </button>
+</form>
+
+<!-- FileUpload -->
+<form id="ul" action="" method="post" enctype="multipart/form-data">
+<input type="file" id="fileA" name="files[]" multiple />
+<output id="list"></output>
 </form>
 
 <script src="/socket.io/socket.io.js"></script>

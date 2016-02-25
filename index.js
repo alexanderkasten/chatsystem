@@ -128,7 +128,9 @@ socket.on('chat message', function(msg){
 
     }
 });
-
+socket.on('pic', function(link){
+  io.to(socket.room).emit('pic', link);
+});
 
 });
 

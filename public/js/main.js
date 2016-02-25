@@ -9,6 +9,7 @@ $(document).ready(function(){
   // focus usernametextbox
   $('#ch1').append($('<i style="color:#33FF00;"> </i>').text('Channel_1'));
   $('h2').hide();
+  $('#ul').hide();
   $('#messages').hide();
   $('#newmess').hide();
   $('.channel').hide();
@@ -27,6 +28,7 @@ $(document).ready(function(){
       $('#newmess').show();
       $('h2').show()
       $('.channel').show();
+      $('#ul').show();
       $('#m').focus();
     }
     return false;
@@ -131,5 +133,41 @@ socket.on('private', function(data){
   function scroll(){
     window.scrollTo(0, document.body.scrollHeight);
   }
+
+
+  function handleFileSelect(evt) {
+    var files = evt.target.files;
+    var output = [];
+    var f;
+
+    for (var i = 0; f = files[i]; i++) {
+      output.push('<li>', f.name, ' (', f.size, ' bytes)', '</li>');
+      var reader = new FileReader();
+      reader.onload = function(file){
+        return function(e){
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', file.name, '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+          var link = e.target.result;
+          //sendpic(link);
+          socket.emit('pic', link);
+        };
+      }(f);
+      reader.readAsDataURL(f);
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+
+  }
+
+  function sendpic(link){
+    $('#messages').append($('<li><img class="abcdefgh" src"' + link + '"/></li>'));
+  }
+
+socket.on('pic', function(link){
+  sendpic(link);
+});
+
+  document.getElementById('fileA').addEventListener('change', handleFileSelect, false);
+
 
 });
