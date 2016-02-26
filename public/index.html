@@ -8,17 +8,14 @@
 </head>
 <body>
 
+<div class="main">
 <h1> ChatSystem </h1>
-
+</div>
 <!-- Login -->
    <form class="form-inline" id="login">
         <input type="text" class="userbox" placeholder="Username" id="user">
       <input type="button" name="join" id="join" value="Join">
   </form>
-
-<!-- Usersonline -->
-    <ul id="online"></ul>
-    <h2> Online: </h2>
 
 <!-- Channellist -->
     <ul class="channel">
@@ -27,9 +24,13 @@
       <li> <a href="#" id="ch3" value="Channel_3">Channel_3</a> </li>
     </ul>
 
+<!-- Usersonline -->
+    <ul id="online"></ul>
+    <h2> Online: </h2>
 <!-- Messagetable -->
+<div class="mess" id="ttt">
 <ul id="messages"></ul>
-
+</div>
 <!-- Messageblock -->
 <form action="" id="newmess" class="new">
   <p> Private Nachrichten können mit /p "username" "text" versandt werden, ohne Anführungszeichen und Groß- und Kleinschreibung der Usernamen beachten! </p>

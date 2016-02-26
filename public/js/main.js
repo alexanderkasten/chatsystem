@@ -10,6 +10,7 @@ $(document).ready(function(){
   $('#ch1').append($('<i style="color:#33FF00;"> </i>').text('Channel_1'));
   $('h2').hide();
   $('#ul').hide();
+  $('.mess').hide();
   $('#messages').hide();
   $('#newmess').hide();
   $('.channel').hide();
@@ -25,8 +26,9 @@ $(document).ready(function(){
       socket.emit('joined', local_user);
       $('#login').detach();
       $('#messages').show();
+      $('.mess').show();
       $('#newmess').show();
-      $('h2').show()
+      $('h2').show();
       $('.channel').show();
       $('#ul').show();
       $('#m').focus();
@@ -132,6 +134,7 @@ socket.on('private', function(data){
 // auto scroll to the end of page
   function scroll(){
     window.scrollTo(0, document.body.scrollHeight);
+
   }
 
 
@@ -151,13 +154,14 @@ socket.on('private', function(data){
     }
   }
 
-  function sendpic(link, t){
-    $('#messages').append($('<li style="color:#33FF00;"> </li>').text(t + ' ' + local_user + ' hat ein Bild gesendet.'))
-    $('#messages').append($('<li><img class="abcdefgh" src="' + link + '"/></li>'));
+  function sendpic(link, t, name){
+    $('#messages').append($('<li style="color:#33FF00;"> </li>').text(t + ' ' + name + ' hat ein Bild gesendet.'))
+    $('#messages').append($('<li><img class="bild" src="' + link + '"/></li>'));
+    $('#messages').append($('<li><a id="dl" href="' + link + '" download>' + 'Download' + '</a></li>'));
   }
 
-socket.on('pic', function(link, t){
-  sendpic(link, t);
+socket.on('pic', function(link, t, name){
+  sendpic(link, t, name);
 });
 
   document.getElementById('fileA').addEventListener('change', handleFileSelect, false);

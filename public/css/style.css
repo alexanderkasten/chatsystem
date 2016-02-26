@@ -1,7 +1,7 @@
 /* Homepage */
 * {
   background:url('/pics/blur_colors-wide.jpg') repeat-y;
-
+  background-attachment: fixed;
   box-sizing: border-box;
 }
 
@@ -81,17 +81,15 @@ body {
 
 /* Message table */
 #messages {
-  background: url('/pics/transparent.png');
-  margin-top: 60px;
+  
   list-style-type:none;
-  margin-bottom: 77px;
 }
 
 /* messages */
 #messages li {
   color: white;
   /*border: 1px dotted white;*/
-  background: url('/pics/transparent.png');
+
   /*background: gray;*/
   margin: 0;
   padding: 5px;
@@ -101,16 +99,17 @@ body {
 /* Online users table */
 #online {
   margin-top: 90px;
-
   background: url('/pics/transparent.png');
-
-  float: right;
+  background-attachment: fixed;
+  position: fixed;
+  right: 5px;
   list-style-type: none;
 }
 
 /* online users */
 #online li {
   background: url('/pics/transparent.png');
+  background-attachment: fixed;
   width: 100%;
   color: white;
   font-size: 20px;
@@ -184,20 +183,22 @@ body {
 }
 
 /* Chatsystem text */
-h1 {
+.main {
+  position: fixed;
+  left: 0;
+  top: 0;
   color: white;
 }
 
 /* Online: */
 h2 {
-  margin-right: 50px;
-  margin-top: 50px;
-  float: right;
-/*position: fixed;*/
+
+  /*margin-top: 10px;*/
+  position: fixed;
+  top: 60px;
+  right: 50px;
   background: url('/pics/transparent.png');
-
   color: white;
-
 }
 
 .us {
@@ -205,6 +206,8 @@ h2 {
 }
 
 .channel {
+  top: 7%;
+  position: fixed;
   background: url('/pics/transparent.png');
   list-style-type: circle;;
 }
@@ -355,12 +358,20 @@ a{
 #list ul, li{
   background: url('/pics/transparent.png');
 }
-.thumb {
-  height: 75px;
-  border: 1px solid #000;
-  margin: 10px 5px 0 0;
-}
-.abcdefgh{
+.bild{
   height: 200;
   width: 300px;
+}
+#dl{
+  background: url('/pics/transparent.png');
+}
+.mess{
+  overflow-y: scroll;
+  background: url('/pics/transparent.png');
+  margin-top: 5%;
+  margin-bottom: 77px;
+  top: 50px;
+  bottom: 15px;
+  position: fixed;;
+  width: 90%
 }

@@ -6,7 +6,6 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const list = {};
 const moment = require('moment');
-const _ = require('underscore');
 const test = {};
 const channels = [];
 app.get('/',function(req, res){
@@ -54,7 +53,7 @@ io.on('connection', function(socket){
       socket.join(socket.room);
       io.emit('updatechannels', channels);
       console.log(time() + ' >> SERVER: ' + user + ' joined to Channel_1...');
-      io.emit('status', time() + ' >> SERVER: ' + user + ' joined to '+ socket.room +'..').to(socket.room);
+      io.to(socket.room).emit('status', time() + ' >> SERVER: ' + user + ' joined to '+ socket.room +'..');
       const userList = getUsersInRoom(socket.room);
       io.to(socket.room).emit('updatelist', userList);
     }
@@ -65,7 +64,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
       console.log(time() + ' >> SERVER: ' + list[socket.id] + ' disconnected...');
       socket.leave(socket.room);
-      io.emit('status', time() + ' >> SERVER: ' + list[socket.id] + ' disconnected..').to(socket.room);
+      io.to(socket.room).emit('status', time() + ' >> SERVER: ' + list[socket.id] + ' disconnected..');
       const currentchanneluser = getUsersInRoom(socket.room);
       io.to(socket.room).emit('updatelist', '');
       io.to(socket.room).emit('updatelist', currentchanneluser);
@@ -130,7 +129,8 @@ socket.on('chat message', function(msg){
 });
 socket.on('pic', function(link){
   var t = time();
-  io.to(socket.room).emit('pic', link, t);
+  var name = socket.name
+  io.to(socket.room).emit('pic', link, t, name);
 });
 
 });
